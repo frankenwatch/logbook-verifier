@@ -229,10 +229,8 @@ def main():
     )
     parser.add_argument('--keyfile', required=True, help='Path to the keyfile JSON')
     parser.add_argument('--logbook', required=True, help='Path to the logbook JSON')
-    parser.add_argument('--skip-files', action='store_true', 
-                       help='Skip file hash verification (signature only)')
     parser.add_argument('--offline', action='store_true',
-                       help='Skip file hash verification when no internet connection (signature only)')
+                       help='Skip file hash verification (no file downloads)')
     
     args = parser.parse_args()
     
@@ -321,10 +319,7 @@ def main():
             
             # Second level: File hash verification (only for file events)
             if is_file_event:
-                if args.skip_files:
-                    print(f"     [⚠️ ] Download image: skipped by --skip-files flag")
-                    warning_count += 1
-                elif args.offline:
+                if args.offline:
                     print(f"     [⚠️ ] Download image: skipped (offline mode)")
                     warning_count += 1
                 else:
@@ -451,7 +446,10 @@ def main():
         else:
             print(f"   ✅ ALL EVENTS VERIFIED (with {warning_count} file download warnings)")
             print("   🔒 Logbook integrity confirmed - all signatures valid")
-            print("   ⚠️  Some file hashes could not be verified due to download issues")
+            if args.offline:
+                print("   ⚠️  Some file hashes could not be verified (offline mode)")
+            else:
+                print("   ⚠️  Some file hashes could not be verified due to download issues")
     else:
         print(f"   ❌ VERIFICATION FAILED - {invalid_count} events have invalid signatures")
         print("   🚨 Logbook integrity compromised - some events may be tampered with")
