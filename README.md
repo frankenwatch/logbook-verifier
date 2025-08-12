@@ -5,7 +5,18 @@ TBD
 ## Usage
 
 ```
-python3 ./logbook-verifier.py  --keyfile ../../thumbnail.key.json  --logbook  /Users/iuliana/Downloads/watch-logbook\ \(3\).json 
+$ python3 logbook-verifier.py  --help
+usage: logbook-verifier.py [-h] --keyfile KEYFILE --logbook LOGBOOK [--offline]
+
+Frankenwatch logbook signature and file hash verification utility
+
+optional arguments:
+  -h, --help         show this help message and exit
+  --keyfile KEYFILE  Path to the keyfile JSON
+  --logbook LOGBOOK  Path to the logbook JSON
+  --offline          Skip file hash verification (no file downloads)
+
+$ python3 ./logbook-verifier.py  --keyfile ./chronograph.key.json  --logbook  ./watch-logbook.json 
 logbook-verifier 1.1 - Frankenwatch logbook signature and file hash verification utility
 [✅] 2025-06-19 06:59:19:event id#1 (property: brand, model): signature valid
 [✅] 2025-06-19 06:59:19:event id#2 (property: country): signature valid
