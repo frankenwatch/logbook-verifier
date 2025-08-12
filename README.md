@@ -1,5 +1,6 @@
 # logbook-verifier
-TBD
+
+https://franken.watch/
 
 
 ## Usage
